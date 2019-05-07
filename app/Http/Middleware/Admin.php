@@ -14,7 +14,17 @@ class Admin
      * @return mixed
      */
     public function handle($request, Closure $next)
+
     {
-        return $next($request);
+
+        if(auth()->user()->nivel == 'administrador'){
+
+            return $next($request);
+
+        }
+
+        return redirect(‘home’)->with(‘error’,’Acceso denagado. No eres Administrador’);
+
     }
 }
+
